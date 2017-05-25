@@ -1,0 +1,11 @@
+<h1>
+  {{title}}
+</h1>
+<p-tree [value]="files">
+    <ng-template let-node  pTemplate="picture">
+        <span>Icon</span>
+    </ng-template>
+    <ng-template let-node  pTemplate="default">
+        <input [(ngModel)]="node.label" type="text" style="width:100%">
+    </ng-template>
+</p-tree>
