@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Tree, TreeNode} from 'primeng/primeng';     //accordion and accordion tab
 import { TreeService } from './tree-service';
+import {TreeDragDropService} from 'primeng/primeng';
 
 @Component({
   selector: 'app-root',

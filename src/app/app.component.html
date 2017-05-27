@@ -1,7 +1,7 @@
 <h1>
   {{title}}
 </h1>
-<p-tree [value]="files">
+<p-tree [value]="files" draggableNodes="true" droppableNodes="true">
     <ng-template let-node  pTemplate="picture">
         <span>Icon</span>
     </ng-template>
