@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { TreeService } from './tree-service'
 import { AppComponent } from './app.component';
 import { Tree, TreeNode, TreeModule } from 'primeng/primeng';
+import {TreeDragDropService} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { Tree, TreeNode, TreeModule } from 'primeng/primeng';
     HttpModule,
     TreeModule
   ],
-  providers: [TreeService],
+  providers: [TreeService, TreeDragDropService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
