@@ -13,6 +13,10 @@ export class SynchService {
 
   constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
     this.items = af.list('/', {
+    //Dunno what it is
+    });
+    this.items.subscribe(items => {
+      console.log("items", items);
     });
 
     this.user = this.afAuth.authState;
@@ -29,6 +33,10 @@ export class SynchService {
   Send(desc: string) {
     this.items.push({ message: desc});
     this.msgVal = '';
+  }
+
+  getItems() {
+    return this.af.object('/');
   }
 
 }
