@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {Tree, TreeNode} from 'primeng/primeng';     //accordion and accordion tab
+import { Component, OnInit } from '@angular/core';
+import { TreeNode } from 'primeng/primeng';     //accordion and accordion tab
 import { TreeService } from './tree-service';
-import {TreeDragDropService} from 'primeng/primeng';
 
 @Component({
   selector: 'app-root',
@@ -24,4 +23,7 @@ export class AppComponent implements OnInit{
       });
   }
 
+  update(){
+    this.treeService.update(this.files);
+  }
 }

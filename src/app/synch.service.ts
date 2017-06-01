@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import {Observable} from 'rxjs/Rx';
 
@@ -9,12 +9,12 @@ import {Observable} from 'rxjs/Rx';
 export class SynchService {
   user: Observable<any>;
   items: FirebaseListObservable<any[]>;
+  root: FirebaseObjectObservable<any[]>;
   msgVal = '';
 
   constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
-    this.items = af.list('/', {
-    });
-
+    this.items = af.list('/data');
+    this.root = af.object('/data');
     this.user = this.afAuth.authState;
   }
 
@@ -26,13 +26,13 @@ export class SynchService {
     this.afAuth.auth.signOut();
   }
 
-  Send(desc: string) {
-    this.items.push({ message: desc});
-    this.msgVal = '';
+  update(data: any) {
+    console.log(JSON.stringify(data))
+    this.root.update(JSON.parse(JSON.stringify(data))).then(items => console.log(items));
   }
 
   getItems() {
-    return this.af.object('/data');
+    return this.items;
   }
 
 }
