@@ -23,7 +23,8 @@ export class AppComponent implements OnInit{
       });
   }
 
-  update(){
-    this.treeService.update(this.files);
+  update() {
+    console.log(this.files);
+    this.treeService.update(this.files,);
   }
 }

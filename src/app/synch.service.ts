@@ -8,13 +8,11 @@ import {Observable} from 'rxjs/Rx';
 @Injectable()
 export class SynchService {
   user: Observable<any>;
-  items: FirebaseListObservable<any[]>;
-  root: FirebaseObjectObservable<any[]>;
+  items: FirebaseObjectObservable<any[]>;
   msgVal = '';
 
   constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
-    this.items = af.list('/data');
-    this.root = af.object('/data');
+    this.items = af.object('/data');
     this.user = this.afAuth.authState;
   }
 
@@ -27,12 +25,18 @@ export class SynchService {
   }
 
   update(data: any) {
-    console.log(JSON.stringify(data))
-    this.root.update(JSON.parse(JSON.stringify(data))).then(items => console.log(items));
+    this.items.update(JSON.parse(JSON.stringify(data, this.replacer))).then(items => console.log(items));
   }
 
   getItems() {
     return this.items;
+  }
+
+  replacer(key, value) {
+    if (key === 'parent') {
+      return undefined;
+    }
+    return value;
   }
 
 }
